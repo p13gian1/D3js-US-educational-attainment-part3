@@ -1,14 +1,3 @@
-<!-- 
-****************************************************************************************
- 
-                                    ΓΙΑΝΝΙΟΣ ΑΝΤΩΝΙΟΣ
-                                        Π2013153
-                            ΕΠΙΚΟΙΝΩΝΙΑ ΑΝΘΡΩΠΟΥ ΥΠΟΛΟΓΙΣΤΗ
-                                        ΠΑΡΑΔΟΤΕΟ 1
-
-**************************************************************************************** -->
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,119 +28,91 @@
 
 </head>
 
-  <header>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v0.3.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Catamaran" rel="stylesheet">
+
+    <style src="assets/stylesheets/style.css"></style>      
+    
+</head>
+<header>
        <nav>
     <ul>
-      <li><a href="#top" onmouseover="showPartOne()">Top</a></li>
-      <li><a href="#national" onmouseover="showPartOne()">National</a></li>
-      <li><a href="#regional" onmouseover="showPartTwo()">Regional</a></li>
-      <li><a href="#state" onmouseover="showPartThree()">State-Level</a></li>
+      <li><a href="#geo" onmouseover="showPartOne()">Geo</a></li>
+      <li><a href="#spiral" onmouseover="showPartTwo()">Spiral</a></li>
+      <li><a href="#bar" onmouseover="showPartThree()">Bar</a></li>
     <ul>
         </nav>
     </header>
-<body>
-    <h1 class="title" onmouseover="responsiveVoice.speak('Educational Attainment in the United States','US English Male');" onmouseleave="responsiveVoice.cancel();">Educational Attainment in the United States</h1>    
-	<p><br></p>
+
+     
     
 
 
-
+<body>
+    
+    <a name="geo"></a>
     <div id="part-one">
-    <h2 class="subtitle" onmouseover="responsiveVoice.speak('Nation-Wide Education Level of Population in Schooling','US English Male');" onmouseleave="responsiveVoice.cancel();">Nation-Wide Education Level of Population in Schooling</h2>
-    </div>
-	<svg id="pie-chart" width="960" height="600">
-    </svg>
+    <h1 class="subtitle">Female/Male ratio of rural world population in 2004 </h1>    
+      <p><br></p>
+
+    <div id="svg1"></div>
+
+    <div id="toolt"></div>
   
 
 
-
-
-
-
-
-    <a name="regional"></a>
-    <div id="part-two">       
-    
-    <h2 class="subtitle"onmouseover="responsiveVoice.speak('Educational Attainment: Region-level Breakdown of University Students','US English Male');" onmouseleave="responsiveVoice.cancel();">Educational Attainment: Region-level Breakdown of University Students</h2>
     <form id="tree-form">
-        <div class="radio-toolbar">
-            <input type="radio" id="mode1" name="treeSum" value="number" checked> 
-            <label for="mode1" onmouseover="responsiveVoice.speak('Pursuing a Masters degree (in number of students)','US English Male');" onmouseleave="responsiveVoice.cancel();">Pursuing a Masters degree (in # of students)</label>
-            <input type="radio" id="mode2" name="treeSum" value="percent">
-            <label for="mode2" onmouseover="responsiveVoice.speak('Pursuing a Masters degree (in %)','US English Male');" onmouseleave="responsiveVoice.cancel();">Pursuing a Masters degree (in %)
-            </label>
-            <input type="radio" id="mode3" name="treeSum" value="male">
-            <label for="mode3" onmouseover="responsiveVoice.speak('Males in College (18-24yrs)(in %)','US English Male');" onmouseleave="responsiveVoice.cancel();">Males in College (18-24yrs)(in %)
-            </label>
-            <input type="radio" id="mode4" name="treeSum" value="femal">
-            <label for="mode4" onmouseover="responsiveVoice.speak('Females in College (18-24yrs) (in %)','US English Male');" onmouseleave="responsiveVoice.cancel();">Females in College (18-24yrs) (in %)
-            </label>
-        </div>
-   
-
+            <div class="radio-toolbar">
+                <input type="radio" id="buttonLeft"> 
+                <label onclick="step('backward')">Previous Country</label>
+                <input type="radio" id="buttonRight"> 
+                <label onclick="step('forward')">Next Country</label>  
+            </div>
     </form>
-     <div id="tooltipdiv"></div> 
-    <div id="chart"></div> 
- </div>
+        <script src="http://d3js.org/topojson.v0.min.js"></script>
+    <script src="assets/scripts/script_1.js"></script>
+
+      </div>
 
 
+    <a name="spiral"></a>
+    <div id="part-two">  
+    <h2 class="subtitle">Spiral heatmap</h2>
+   <p><br></p>
 
+    <div id="chart"></div>
+    <div id="legend"></div>
 
+      
 
+    <script src="assets/scripts/script_2.js">      
+    </script>
 
+</div>
 
+<a name="bar"></a>
+<div id="part-three">
+ <h2 class="subtitle">Spiral heatmap</h2>
+   <p><br></p>
 
+<div id="svg2"></div>
 
-	<a name="state"></a>
-    <div id="part-three">
-    <h2 class="subtitle" onmouseover="responsiveVoice.speak('Education Level of Population in Schooling: State-level Breakdown','US English Male');" onmouseleave="responsiveVoice.cancel();">Education Level of Population in Schooling: State-level Breakdown
-    </h2>
-	<form id="stack-form">
-        <div class="radio-toolbar">
-            <input type="radio" id="radio1" name="mode" value="bypercent" checked>
-            <label for="radio1" onmouseover="responsiveVoice.speak('Students (in %)',
-            'US English Male');" onmouseleave="responsiveVoice.cancel();">Students (in %)
-            </label>
-            <input type="radio" id="radio2" name="mode" value="bycount">
-            <label for="radio2" onmouseover="responsiveVoice.speak('Students (in number of people)','US English Male');" onmouseleave="responsiveVoice.cancel();">Students (in number of people)
-            </label>
-        </div>
-    </form>
-   
-
-    <div id="toolt"></div><!-- div to hold tooltip. -->
-  <div>
-    <svg width="960" height="600" id="statesvg"></svg>
-    
-  </div>
+<script src="assets/scripts/script_3.js">      
+    </script>
 </div>
 
 
- <audio>
-    <source src="assets/sounds/snd.ogg"></source>
-    <source src="assets/sounds/snd.mp3"></source>
- </audio>   
+     
 
-
-
-<script src="https://d3js.org/d3.v3.min.js"></script>
-<script src="https://d3js.org/d3.v4.min.js"></script>
-
-
-<script src="assets/scripts/script_3.js"></script>
-<script src="assets/scripts/script_4.js"></script>
-<script src="assets/scripts/script_5.js"></script>
-<script src="assets/scripts/uStates.js"></script>
-<script src="assets/scripts/script_6.js"></script>
-<script>
-
+<script type="text/javascript">
 
 function showPartOne(){
 document.getElementById("part-one").style.display = "block";
-document.getElementById("pie-chart").style.display = "block";
+
 
 document.getElementById("part-two").style.display = "none";
-document.getElementById("chart").style.display = "none";
+
 
 document.getElementById("part-three").style.display = "none";
 
@@ -159,10 +120,10 @@ document.getElementById("part-three").style.display = "none";
 
 function showPartTwo(){
 document.getElementById("part-one").style.display = "none";
-document.getElementById("pie-chart").style.display = "none";
+
 
 document.getElementById("part-two").style.display = "block";
-document.getElementById("chart").style.display = "initial";
+
 
 document.getElementById("part-three").style.display = "none";
 
@@ -170,23 +131,16 @@ document.getElementById("part-three").style.display = "none";
 
 function showPartThree(){
 document.getElementById("part-one").style.display = "none";
-document.getElementById("pie-chart").style.display = "none";
+
 
 document.getElementById("part-two").style.display = "none";
-document.getElementById("chart").style.display = "none";
+
 
 document.getElementById("part-three").style.display = "block";
 
 }
 
-$("nav a").mouseover(function() {
- var audio = document.getElementsByTagName("audio")[0];
- audio.play();
-});
-
 showPartOne();
-
-
 
 $( document ).ready(function() {
       $(window).scroll(function(){
@@ -198,6 +152,8 @@ $( document ).ready(function() {
         }
     });
 });
+
 </script>
+
+
 </body>
-</html>
